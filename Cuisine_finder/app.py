@@ -63,7 +63,7 @@ for lists in ingredients:
 
 
 # load deep learning model
-dee_model = load_model("model/cuisine_deep_model_trained.h5")
+deep_model = load_model("model/cuisine_deep_model_trained.h5")
 # ========================================
 
 
