@@ -8,10 +8,30 @@ from flask import (
     request,
     redirect)
 
-from flask_sqlalchemy import SQLAlchemy
+# Dependencies for Spoonacular API
+import requests
+import pandas as pd
+import json
+from pprint import pprint
 
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
+
+#################################################
+# Database Setup 
+# This may not be necessary!!
+#################################################
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db/db.sqlite"
+
+db = SQLAlchemy(app)
+
+
+#################################################
+# Original Database Setup
+#################################################
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db/FastFood.sqlite"
 
@@ -28,19 +48,102 @@ class FastFood(db.Model):
 
     def __repr__(self):
         return '<FastFood %r>' % (self.name)
+#################################################
+# End Original Database Setup
+#################################################
 
-# ====================probably should remove before goign live?===============
-# @app.before_first_request
-# def setup():
-#     # Recreate database each time for demo
-#     db.drop_all()
-#     db.create_all()
 
 
 # create route that renders index.html template
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/spoonacular/")
+def spoonacular_app():
+
+    # # User Input
+    user_url = input("What is the URL for the Recipe? ")
+    print(user_url)
+
+    ## Build URL
+
+    # Hardcoded URL Example
+    # import_url = "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookie"
+
+    url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/extract?url="
+
+    headers={
+        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "30943f0a23msh36da95252ee0510p14fda2jsnd4729b960015"
+    }
+
+    query_url = url + user_url
+    print(query_url)
+
+    response = requests.get(query_url, headers=headers).json()
+    # print(response)
+
+    # pprint(response)
+
+    # Just get the Ingredients Dictionary
+    ingredients_ext = response['extendedIngredients']
+    pprint(ingredients_ext)
+
+    """# The Loop"""
+
+    # set up lists to hold reponse info
+    ingredients = []
+
+    # Loop through to get ingredients
+    for i in ingredients_ext:
+        ingredients.append(i['name'])
+
+    print(ingredients)
+
+    # To Pandas
+    ingredients_df = pd.DataFrame(ingredients)
+    # ingredients_df.head()
+    print(ingredients_df)
+
+    #################################################
+    # Extra API data which can be used
+    ########################
+    # spoonacular_cuisines = response['cuisines']
+    # print(spoonacular_cuisines)
+    # spoonacular_dishTypes = response['dishTypes']
+    # print(spoonacular_dishTypes)
+    # spoonacular_title = response['title']
+    # print(spoonacular_title)
+    ########################
+    # End Extra API data which can be used
+    #################################################
+
+    #################################################
+    # Post to Database Setup and JSonify
+    ########################
+    engine = create_engine('sqlite:///db/ingredients_db.sqlite', echo=False)
+    # engine = create_engine('sqlite://', echo=False)
+
+    ingredients_df.to_sql('ingred_tbl', con=engine)
+
+    results = engine.execute("SELECT * FROM ingred_tbl").fetchall()
+    print(results)
+
+    data_for_json = []
+
+    for result in results:
+        data_for_json.append({
+            "name": result[1]
+        })
+    ########################
+    # End Post to Database Setup and JSonify
+    #################################################
+
+    return jsonify(data_for_json)
+    # return "cheese"
+
 
 
 # Query the database and send the jsonified results
@@ -95,4 +198,4 @@ def Cristian():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
