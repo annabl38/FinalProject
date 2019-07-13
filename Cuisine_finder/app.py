@@ -69,23 +69,7 @@ deep_model = load_model("model/cuisine_deep_model_trained.h5")
 
 
 
-# =======CODE TO LOAD INTO ROUTES==========
 
-# The input variable needs to be put into the list below:
-input_ingred = []
-
-encoding = [0]*len(i_map)
-for items in input_ingred:
-    if items in i_list:
-        encoding[i_map[items]] = 1
-    else:
-        print(items + " not found")
-
-test = np.expand_dims(encoding, axis=0)
-test.shape
-
-output = cuis_unique[int((deep_model.predict_classes(test)))]
-# ==============================
 
 
 app = Flask(__name__)
@@ -173,10 +157,10 @@ def spoonacular_app():
 
     print(ingredients)
 
-    # To Pandas
-    ingredients_df = pd.DataFrame(ingredients)
-    # ingredients_df.head()
-    print(ingredients_df)
+    # # To Pandas
+    # ingredients_df = pd.DataFrame(ingredients)
+    # # ingredients_df.head()
+    # print(ingredients_df)
 
     #################################################
     # Extra API data which can be used
@@ -194,26 +178,46 @@ def spoonacular_app():
     #################################################
     # Post to Database Setup and JSonify
     ########################
-    engine = create_engine('sqlite:///db/ingredients_db.sqlite', echo=False)
+    # engine = create_engine('sqlite:///db/ingredients_db.sqlite', echo=False)
     # engine = create_engine('sqlite://', echo=False)
 
-    ingredients_df.to_sql('ingred_tbl', con=engine)
+    # ingredients_df.to_sql('ingred_tbl', con=engine)
 
-    results = engine.execute("SELECT * FROM ingred_tbl").fetchall()
-    print(results)
+    # results = engine.execute("SELECT * FROM ingred_tbl").fetchall()
+    # print(results)
 
-    data_for_json = []
+    # data_for_json = []
 
-    for result in results:
-        data_for_json.append({
-            "name": result[1]
-        })
+    # for result in results:
+    #     data_for_json.append({
+    #         "name": result[1]
+    #     })
     ########################
     # End Post to Database Setup and JSonify
     #################################################
 
-    return jsonify(data_for_json)
-    # return "cheese"
+
+    # =======CODE TO LOAD INTO ROUTES==========
+
+    # The input variable needs to be put into the list below:
+    input_ingred = []
+    input_ingred = ingredients
+
+    encoding = [0]*len(i_map)
+    for items in input_ingred:
+        if items in i_list:
+            encoding[i_map[items]] = 1
+        else:
+            print(items + " not found")
+
+    test = np.expand_dims(encoding, axis=0)
+    test.shape
+
+    output = cuis_unique[int((deep_model.predict_classes(test)))]
+    # ==============================
+    
+    # return jsonify(data_for_json)
+    return output
 
 
 
