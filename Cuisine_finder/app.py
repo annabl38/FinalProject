@@ -17,6 +17,77 @@ from pprint import pprint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
+
+# ==================Machine Learning=============
+# import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from keras.utils import to_categorical
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_classification
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import load_model
+
+# import database
+data = pd.read_json("db/train.json")
+
+# create cuisnie list for output
+cuisine_list = data['cuisine']
+cuisine_compilation = []
+for cuisine in cuisine_list:
+    cuisine_compilation.append(cuisine)
+      
+cuis_unique = list(set(cuisine_compilation))
+
+
+# create cuisine list to use as template for unput
+ingredients = data.loc[:,'ingredients']
+
+i_map = {}
+i_list = []
+counter = 0
+for lists in ingredients:
+    for items in lists:
+        if items not in i_map:
+            i_list.append(items)
+            i_map[items] = counter
+            counter = counter + 1
+
+ingredients_encodings = []
+for lists in ingredients:
+    encoding = [0]*len(i_map)
+    for items in lists:
+        encoding[i_map[items]] = 1
+    ingredients_encodings.append(encoding)
+
+
+# load deep learning model
+dee_model = load_model("model/cuisine_deep_model_trained.h5")
+# ========================================
+
+
+
+
+# =======CODE TO LOAD INTO ROUTES==========
+
+# The input variable needs to be put into the list below:
+input_ingred = []
+
+encoding = [0]*len(i_map)
+for items in input_ingred:
+    if items in i_list:
+        encoding[i_map[items]] = 1
+    else:
+        print(items + " not found")
+
+test = np.expand_dims(encoding, axis=0)
+test.shape
+
+output = cuis_unique[int((deep_model.predict_classes(test)))]
+# ==============================
+
+
 app = Flask(__name__)
 
 #################################################
