@@ -25,9 +25,9 @@ from keras.utils import to_categorical
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_classification
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.models import load_model
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.models import load_model
 from keras.models import model_from_json
 import tensorflow as tf
 # import database
@@ -64,14 +64,21 @@ for lists in ingredients:
 
 
 # load deep learning model
-deep_model = None
-with open('Model/deep_model_architecture.json', 'r') as f:
-    deep_model = tf.keras.models.model_from_json(f.read())
+# deep_model = None
+# with open('Model/deep_model_architecture.json', 'r') as f:
 
-# Load weights into the new model
-deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+#     deep_model = model_from_json(f.read())
+# deep_model = Sequential()
+# deep_model.add(Dense(units=20, activation='relu', input_dim=6714))
+# deep_model.add(Dense(units=15, activation='relu'))
+# deep_model.add(Dense(units=10, activation='relu'))
+# deep_model.add(Dense(units=20, activation='softmax'))
+# deep_model.compile(optimizer='adam',
+#                    loss='categorical_crossentropy',
+#                    metrics=['accuracy'])
+# # Load weights into the new model
+# deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
 # ========================================
-deep_model.summary()
 
 
 
@@ -125,13 +132,13 @@ def home():
 def spoonacular_app():
 
     # # User Input
-    user_url = input("What is the URL for the Recipe? ")
-    print(user_url)
+    # user_url = input("What is the URL for the Recipe? ")
+    # print(user_url)
 
     ## Build URL
 
     # Hardcoded URL Example
-    # import_url = "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookie"
+    user_url = "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookie"
 
     url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/extract?url="
 
@@ -217,10 +224,19 @@ def spoonacular_app():
             print(items + " not found")
 
     print(encoding)
-    
+
     test = np.expand_dims(encoding, axis=0)
     test.shape
-
+    deep_model = Sequential()
+    deep_model.add(Dense(units=20, activation='relu', input_dim=6714))
+    deep_model.add(Dense(units=15, activation='relu'))
+    deep_model.add(Dense(units=10, activation='relu'))
+    deep_model.add(Dense(units=20, activation='softmax'))
+    # Load weights into the new model
+    deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+    deep_model.compile(optimizer='adam',
+                    loss='categorical_crossentropy',
+                    metrics=['accuracy'])
     output = cuis_unique[int((deep_model.predict_classes(test)))]
     print(output)
     # ==============================
