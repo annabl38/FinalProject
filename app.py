@@ -18,53 +18,67 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
 
-# # ==================Machine Learning=============
-# # import pandas as pd
-# from sklearn.preprocessing import LabelEncoder
-# from keras.utils import to_categorical
-# import numpy as np
-# from sklearn.model_selection import train_test_split
-# from sklearn.datasets import make_classification
-# from tensorflow.keras.models import Sequential
-# from tensorflow.keras.layers import Dense
-# from tensorflow.keras.models import load_model
+# ==================Machine Learning=============
+# import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from keras.utils import to_categorical
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_classification
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.models import load_model
+from keras.models import model_from_json
+import tensorflow as tf
+# import database
+data = pd.read_json("db/train.json")
 
-# # import database
-# data = pd.read_json("db/train.json")
-
-# # create cuisnie list for output
-# cuisine_list = data['cuisine']
-# cuisine_compilation = []
-# for cuisine in cuisine_list:
-#     cuisine_compilation.append(cuisine)
-
-# cuis_unique = list(set(cuisine_compilation))
-
-
-# # create cuisine list to use as template for unput
-# ingredients = data.loc[:,'ingredients']
-
-# i_map = {}
-# i_list = []
-# counter = 0
-# for lists in ingredients:
-#     for items in lists:
-#         if items not in i_map:
-#             i_list.append(items)
-#             i_map[items] = counter
-#             counter = counter + 1
-
-# ingredients_encodings = []
-# for lists in ingredients:
-#     encoding = [0]*len(i_map)
-#     for items in lists:
-#         encoding[i_map[items]] = 1
-#     ingredients_encodings.append(encoding)
+# create cuisnie list for output
+cuisine_list = data['cuisine']
+cuisine_compilation = []
+for cuisine in cuisine_list:
+    cuisine_compilation.append(cuisine)
+      
+cuis_unique = list(set(cuisine_compilation))
 
 
-# # load deep learning model
-# deep_model = load_model("model/cuisine_deep_model_trained.h5")
-# # ========================================
+# create cuisine list to use as template for unput
+ingredients = data.loc[:,'ingredients']
+
+i_map = {}
+i_list = []
+counter = 0
+for lists in ingredients:
+    for items in lists:
+        if items not in i_map:
+            i_list.append(items)
+            i_map[items] = counter
+            counter = counter + 1
+
+ingredients_encodings = []
+for lists in ingredients:
+    encoding = [0]*len(i_map)
+    for items in lists:
+        encoding[i_map[items]] = 1
+    ingredients_encodings.append(encoding)
+
+
+# load deep learning model
+# deep_model = None
+# with open('Model/deep_model_architecture.json', 'r') as f:
+
+#     deep_model = model_from_json(f.read())
+# deep_model = Sequential()
+# deep_model.add(Dense(units=20, activation='relu', input_dim=6714))
+# deep_model.add(Dense(units=15, activation='relu'))
+# deep_model.add(Dense(units=10, activation='relu'))
+# deep_model.add(Dense(units=20, activation='softmax'))
+# deep_model.compile(optimizer='adam',
+#                    loss='categorical_crossentropy',
+#                    metrics=['accuracy'])
+# # Load weights into the new model
+# deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+# ========================================
 
 
 
@@ -235,24 +249,35 @@ def spoonacular_app():
     # =======CODE TO LOAD INTO ROUTES==========
 
     # The input variable needs to be put into the list below:
-    # input_ingred = []
-    # input_ingred = ingredients
+    input_ingred = []
+    input_ingred = ingredients
 
-    # encoding = [0]*len(i_map)
-    # for items in input_ingred:
-    #     if items in i_list:
-    #         encoding[i_map[items]] = 1
-    #     else:
-    #         print(items + " not found")
+    encoding = [0]*len(i_map)
+    for items in input_ingred:
+        if items in i_list:
+            encoding[i_map[items]] = 1
+        else:
+            print(items + " not found")
 
-    # test = np.expand_dims(encoding, axis=0)
-    # test.shape
-
-    # output = cuis_unique[int((deep_model.predict_classes(test)))]
+    test = np.expand_dims(encoding, axis=0)
+    test.shape
+    deep_model = Sequential()
+    deep_model.add(Dense(units=20, activation='relu', input_dim=6714))
+    deep_model.add(Dense(units=15, activation='relu'))
+    deep_model.add(Dense(units=10, activation='relu'))
+    deep_model.add(Dense(units=20, activation='softmax'))
+    # Load weights into the new model
+    deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+    deep_model.compile(optimizer='adam',
+                    loss='categorical_crossentropy',
+                    metrics=['accuracy'])
+    output = cuis_unique[int((deep_model.predict_classes(test)))]
+    print(output)
     # ==============================
-
+    
     # return jsonify(data_for_json)
-    return "cheese"
+    return jsonify(output)
+    # return "cheese"
 
 
 @app.route('/Anna')
