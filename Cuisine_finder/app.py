@@ -223,8 +223,6 @@ def spoonacular_app():
         else:
             print(items + " not found")
 
-    print(encoding)
-
     test = np.expand_dims(encoding, axis=0)
     test.shape
     deep_model = Sequential()
