@@ -28,7 +28,8 @@ from sklearn.datasets import make_classification
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.models import load_model
-
+from keras.models import model_from_json
+import tensorflow as tf
 # import database
 data = pd.read_json("db/train.json")
 
@@ -63,9 +64,14 @@ for lists in ingredients:
 
 
 # load deep learning model
-deep_model = load_model("model/cuisine_deep_model_trained.h5")
-# ========================================
+deep_model = None
+with open('Model/deep_model_architecture.json', 'r') as f:
+    deep_model = tf.keras.models.model_from_json(f.read())
 
+# Load weights into the new model
+deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+# ========================================
+deep_model.summary()
 
 
 
@@ -210,10 +216,13 @@ def spoonacular_app():
         else:
             print(items + " not found")
 
+    print(encoding)
+    
     test = np.expand_dims(encoding, axis=0)
     test.shape
 
     output = cuis_unique[int((deep_model.predict_classes(test)))]
+    print(output)
     # ==============================
     
     # return jsonify(data_for_json)
