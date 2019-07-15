@@ -115,14 +115,18 @@ def home():
 # Query the database and send the jsonified results
 @app.route("/url_input", methods=["GET", "POST"])
 def url_input_page():
+    
     if request.method == "POST":
         recipe_url = request.form["recipe_url"]
 
         personaldata = CuisineFinder(recipe_url=recipe_url)
         db.session.add(personaldata)
         db.session.commit()
+        # ctype=personaldata.id
         # print(CuisineFinder.id)
         return redirect(f"/spoonacular/?id={personaldata.id}", code=302)
+        # return jsonify(personaldata.id)
+        # return(jsonify(ctype))
 
     return render_template("spoonacular.html")
 
@@ -272,27 +276,26 @@ def spoonacular_app():
                     loss='categorical_crossentropy',
                     metrics=['accuracy'])
     output = cuis_unique[int((deep_model.predict_classes(test)))]
-    print(output)
+    # print(output)
+    output.capitalize()
     # ==============================
     
     # return jsonify(data_for_json)
-    return jsonify(output)
+    return render_template('output.html',output=output)
     # return "cheese"
 
 
-@app.route('/Anna')
+@app.route('/viz')
 def Anna():
-    return render_template('Anna.html')
+    return render_template('viz.html')
 
 
-@app.route('/Kim')
+@app.route('/machlearn')
 def Kim():
-    return render_template('Kim.html')
+    return render_template('machlearn.html')
 
 
-@app.route('/Cristian')
-def Cristian():
-    return render_template('Cristian.html')
+
 
 
 if __name__ == "__main__":
