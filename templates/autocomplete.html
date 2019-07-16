@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ingredient Autocomplete</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete_style.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+
+
+    <!--Styles for CuisineFinder-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}"> -->
+    <!-- <link rel="stylesheet" href="../static/css/cuisinestyle.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cuisinestyle.css') }}">
+    <link href="{{ url_for('static',filename='css/all.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+    <!-- =================Navbar TOP========================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(115, 182, 182)">
+        <a class="navbar-brand" href="/">Cuisine Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/machlearn">Machine Learning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/viz">Visualizations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/url_input">Test it!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- ===================Navbar BOT================== -->
+
+    <!-- ingredient chooser -->
+    <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" name="myCountry" placeholder="Ingredient">
+        </div>
+        <!-- <input type="submit"> -->
+    </form>
+
+    <!-- input list -->
+    <div id="myDIV" class="header">
+        <span onclick="newElement()" class="addBtn">Add</span>
+    </div>
+    <ul id="myUL">
+    </ul>
+    <span onclick="submitIngredients()" class="addBtn">Submit</span>
+
+    <!-- inport javascript file -->
+    <!-- <script type="text/javascript" src="autocomplete.js"></script> -->
+    <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
+
+
+
+
+    <!--Styles for CuisineFinder-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="{{ url_for('static', filename='../static/js/switch.js') }}"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+</body>
+
+</html>

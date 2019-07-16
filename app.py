@@ -286,7 +286,7 @@ def spoonacular_app():
 
 
 @app.route('/viz')
-def Anna():
+def Map():
     return render_template('viz.html')
 
 
@@ -295,7 +295,17 @@ def Kim():
     return render_template('machlearn.html')
 
 
+@app.route('/autocomplete')
+def auto():
+    return render_template('autocomplete.html')
 
+# This will be where the json for the ingredients list will be stored
+@app.route('/autocomplete_ingredients')
+def auto_ingredients():
+    data = pd.read_json("db/autocomplete_ingredients.json")
+
+    # return jsonify(data)
+    return data
 
 
 if __name__ == "__main__":
