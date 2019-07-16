@@ -311,6 +311,10 @@ def auto():
 @app.route("/autocomplete_post", methods=["GET", "POST"])
 def url_input_page():
     
+# This route is essentially copied/modified from the currently working /input_url route
+# This route needs to accept the list created by the autocomplete.js file and submit it to the database, which should be correctly 
+# configured below
+
     if request.method == "POST":
         # recipe_url = request.form["recipe_url"]
         ingredient_autocomplete = request.form["ingredient_autocomplete"]
