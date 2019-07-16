@@ -101,6 +101,15 @@ class CuisineFinder(db.Model):
     def __repr__(self):
         return '<CuisineFinder %r>' % (self.name)
 
+class CuisineFinderAuto(db.Model):
+    __tablename__ = 'ingredient_list'
+
+    id = db.Column(db.Integer, primary_key=True)
+    ingredient_autocomplete = db.Column(db.String(500))
+
+    def __repr__(self):
+        return '<CuisineFinderAuto %r>' % (self.name)
+
 db.create_all()
 #################################################
 # End Database Setup
@@ -291,13 +300,32 @@ def Map():
 
 
 @app.route('/machlearn')
-def Kim():
+def Colab():
     return render_template('machlearn.html')
 
 
 @app.route('/autocomplete')
 def auto():
     return render_template('autocomplete.html')
+
+@app.route("/autocomplete_post", methods=["GET", "POST"])
+def url_input_page():
+    
+    if request.method == "POST":
+        # recipe_url = request.form["recipe_url"]
+        ingredient_autocomplete = request.form["ingredient_autocomplete"]
+
+        # personaldata = CuisineFinder(recipe_url=recipe_url)
+        autocompletedata = CuisineFinderAuto(ingredient_autocomplete=ingredient_autocomplete)
+        db.session.add(autocompletedata)
+        db.session.commit()
+        # ctype=personaldata.id
+        # print(CuisineFinder.id)
+        return redirect(f"/autocomplete/?id={autocompletedata.id}", code=302)
+        # return jsonify(personaldata.id)
+        # return(jsonify(ctype))
+
+    return render_template("autocomplete.html")
 
 # This will be where the json for the ingredients list will be stored
 @app.route('/autocomplete_ingredients')
