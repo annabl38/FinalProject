@@ -292,7 +292,7 @@ def Anna():
 
 @app.route('/machlearn')
 def Kim():
-    return render_template('machlearn.html')
+    return render_template('Cusine_For_Github.html')
 
 
 
