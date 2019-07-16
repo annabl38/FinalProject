@@ -15,13 +15,13 @@
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     
     // create 2 data_set
-    var data01 = {a: 9, b: 20, c:30, d:8, e:12}
+    <script type= "text/python" src="app.py"></script>
+    var data01 = num_dict['filipino']
     var data02 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
     
     // set the color scale
     var color = d3.scaleOrdinal()
-      .domain(["a", "b", "c", "d", "e", "f"])
-      .range(d3.schemeDark2);
+        .range(d3.schemeDark2);
     
     // A function that create / update the plot for a given variable:
     function update(data) {
@@ -60,5 +60,5 @@
     }
     
     // Initialize the plot with the first dataset
-    update(data1)
+    update(data01)
     

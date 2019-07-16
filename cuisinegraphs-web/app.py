@@ -1,38 +1,46 @@
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+import pandas as pd
+from math import pi
+import heapq
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+doc="train.json"
+df = pd.read_json(doc, orient='columns')
 
-app.layout = html.Div(children=[
-    html.Label('Slider'),
-    dcc.Slider(
-        min=0,
-        max=20,
-        marks={i: 'Label {}'.format(i) if i == 1 else str(i) for i in range(1, 21)},
-        value=3,
-    ),
-    html.H1(children='Hello Dash'),
+ingredients = df['ingredients']
+all_ingredients = []
+for item in ingredients:
+    all_ingredients.extend(item)
 
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
+unique_ingredients = list(set(all_ingredients))
 
-    dcc.Graph(
-        id='example-graph',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'title': 'Dash Data Visualization'
-            }
-        }
-    )
-])
+cuisines = df.groupby('cuisine').count()
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+cuisine_list = list(set(df['cuisine']))
+big_dict={}
+for item in cuisine_list:
+    big_dict[item]=[]
+
+for index, row in df.iterrows():
+    big_dict[row['cuisine']].append(row['ingredients'][0])
+
+num_dict={}
+for item in cuisine_list:
+    num_dict[item]={}
+
+for item in cuisine_list:
+    list=big_dict[item]
+    for ingred in list:
+        if ingred in num_dict[item]:
+            num_dict[item][ingred]+=1
+        else:
+            num_dict[item][ingred]=1
+
+#need a loop to go thorugh all cuisines
+country_data = num_dict['filipino']
+popIngredients= heapq.nlargest(5, country_data, key=country_data.get)
+x= [country_data[key] for key in popIngredients]
+filipino= plt.pie(x=x, labels=popIngredients)
