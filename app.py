@@ -309,7 +309,7 @@ def auto():
     return render_template('autocomplete.html')
 
 @app.route("/autocomplete_post", methods=["GET", "POST"])
-def url_input_page():
+def recipe_input_page():
     
 # This route is essentially copied/modified from the currently working /input_url route
 # This route needs to accept the list created by the autocomplete.js file and submit it to the database, which should be correctly 
