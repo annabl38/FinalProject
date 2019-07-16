@@ -1,7 +1,7 @@
 // Create a map object
 var myMap = L.map("map", {
-  center: [15.5994, -28.6731],
-  zoom: 3
+  center: [32, -10],
+  zoom: 2
 });
 
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -121,20 +121,20 @@ for (var i = 0; i < countries.length; i++) {
 
   // Conditionals for countries points
   var color = "";
-  if (countries[i].points > 2000) {
-    color = "green";
+  if (countries[i].points > 4000) {
+    color = "cyan";
   }
-  else if (countries[i].points > 1500) {
-    color = "blue";
+  else if (countries[i].points > 2000) {
+    color = "dodgerblue";
   }
   else if (countries[i].points > 1000) {
-    color = "orange";
+    color = "rebeccapurple";
   }
   else if (countries[i].points > 500) {
-    color = "gold";
+    color = "mediumslateblue";
   }
   else {
-    color = "yellow";
+    color = "slateblue";
   }
 
   // Add circles to map
@@ -143,6 +143,6 @@ for (var i = 0; i < countries.length; i++) {
     color: "white",
     fillColor: color,
     // Adjust radius
-    radius: countries[i].points * 150
+    radius: Math.sqrt(countries[i].points) * 11000
   }).bindPopup("<h1>" + countries[i].name + "</h1> <hr> <h3>Count: " + countries[i].points + "</h3>").addTo(myMap);
 }
