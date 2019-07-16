@@ -14,9 +14,16 @@
       .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     
-    // create 2 data_set
-    <script type= "text/python" src="app.py"></script>
-    var data01 = num_dict['filipino']
+    // The problem area, calling the json //
+    d3.json("cuisine_json.json"), (function(data) {
+      console.log(data[0]);
+    });
+    data.forEach(function(data) {
+      data.cuisine = +data[0]
+    });
+
+    
+    var data01 = data.filipino
     var data02 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
     
     // set the color scale
