@@ -1,6 +1,7 @@
 var ingredients = [];
 d3.csv("ingredients.csv", function(data) {
   ingredients.push(data.ingredients)
+  console.log(data.ingredients)
 });
 
 
