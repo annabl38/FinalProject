@@ -20178,19 +20178,19 @@ d3.csv("static/js/ingredients.csv", function(data) {
   ingredients.push(data.ingredients)
 });
 
-var ingredientsJSONURL = [];
-// Load ingredientsJSONURL
-d3.json("db/autocomplete_ingredients.json", function(data) {
-    console.log(data);
-    ingredientsJSONURL.push(data.ingredients)
-});
+// var ingredientsJSONURL = [];
+// // Load ingredientsJSONURL
+// d3.json("db/autocomplete_ingredients.json", function(data) {
+//     console.log(data);
+//     ingredientsJSONURL.push(data.ingredients)
+// });
 
-var ingredientsJSONH = [];
-// Load ingredientsJSONhardcoded
-d3.json(ingredientsJSONhardcoded, function(data) {
-    console.log(data);
-    ingredientsJSONH.push(data.ingredients)
-});
+// var ingredientsJSONH = [];
+// // Load ingredientsJSONhardcoded
+// d3.json(ingredientsJSONhardcoded, function(data) {
+//     console.log(data);
+//     ingredientsJSONH.push(data.ingredients)
+// });
 
 // // Load Ingredients JSON
 // d3.json("http://127.0.0.1:5000/autocomplete_ingredients", function(data) {
