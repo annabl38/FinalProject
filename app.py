@@ -304,6 +304,14 @@ def Colab():
     return render_template('machlearn.html')
 
 
+@app.route('/predict',  methods=["GET", "POST"])
+def predict():
+    if request.method == 'POST':
+        ingredient_autocomplete = request.form["ingredient-list[]"]
+        print(ingredient_autocomplete)
+    return render_template("predict.html")
+
+
 @app.route('/autocomplete')
 def auto():
     return render_template('autocomplete.html')
@@ -318,16 +326,8 @@ def recipe_input_page():
     if request.method == "POST":
         # recipe_url = request.form["recipe_url"]
         ingredient_autocomplete = request.form["ingredient_autocomplete"]
+        print(ingredient_autocomplete)
 
-        # personaldata = CuisineFinder(recipe_url=recipe_url)
-        autocompletedata = CuisineFinderAuto(ingredient_autocomplete=ingredient_autocomplete)
-        db.session.add(autocompletedata)
-        db.session.commit()
-        # ctype=personaldata.id
-        # print(CuisineFinder.id)
-        return redirect(f"/autocomplete/?id={autocompletedata.id}", code=302)
-        # return jsonify(personaldata.id)
-        # return(jsonify(ctype))
 
     return render_template("autocomplete.html")
 

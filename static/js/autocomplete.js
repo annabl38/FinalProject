@@ -20174,7 +20174,7 @@ Looks like this:
 */
 
 var ingredients = [];
-d3.csv("db/ingredients.csv", function(data) {
+d3.csv("static/js/ingredients.csv", function(data) {
   ingredients.push(data.ingredients)
 });
 
