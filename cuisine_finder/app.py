@@ -33,8 +33,9 @@ from keras.models import model_from_json
 from keras import backend as k
 import tensorflow as tf
 # import database
-data = pd.read_json("db/train.json")
 print(os.getcwd())
+
+data = pd.read_json("./db/train.json")
 # create cuisnie list for output
 cuisine_list = data['cuisine']
 cuisine_compilation = []
