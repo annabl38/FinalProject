@@ -35,7 +35,7 @@ import tensorflow as tf
 # import database
 print(os.getcwd())
 
-data = pd.read_json("./cuisine_finder/db/train.json")
+data = pd.read_json("db/train.json")
 # create cuisnie list for output
 cuisine_list = data['cuisine']
 cuisine_compilation = []
