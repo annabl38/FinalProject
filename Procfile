@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn cuisine_finder.app:app
