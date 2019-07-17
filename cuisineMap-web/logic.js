@@ -134,15 +134,53 @@ for (var i = 0; i < countries.length; i++) {
     color = "mediumslateblue";
   }
   else {
-    color = "slateblue";
+    color = "indigo";
   }
 
   // Add circles to map
   L.circle(countries[i].location, {
     fillOpacity: 0.75,
-    color: "white",
+    color: "azure",
     fillColor: color,
     // Adjust radius
-    radius: Math.sqrt(countries[i].points) * 11000
-  }).bindPopup("<h1>" + countries[i].name + "</h1> <hr> <h3>Count: " + countries[i].points + "</h3>").addTo(myMap);
-}
+    radius: Math.sqrt(countries[i].points) * 10000
+  }).bindPopup("<h1>" + countries[i].name + "</h1> <hr> <h3>Recipe Count: " + countries[i].points + "</h3>").addTo(myMap);
+};
+
+/////
+function getColor(d) {
+  if (d >= 4000) {
+    color = "cyan";
+  }
+  else if (d>= 2000) {
+    color = "dodgerblue";
+  }
+  else if (d >= 1000) {
+    color = "rebeccapurple";
+  }
+  else if (d >= 500) {
+    color = "mediumslateblue";
+  }
+  else {
+    color = "indigo";
+  }}
+
+  var legend = L.control({position: 'topright'});
+
+  legend.onAdd = function () {
+  
+    var div = L.DomUtil.create('div', 'info legend'),
+      magnitudes = [0, 500, 1000, 2000, 4000];
+
+    for (var i = 0; i < magnitudes.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(magnitudes[i] + 1) + '"></i> ' +
+            magnitudes[i] + (magnitudes[i + 1] ? ' - ' + magnitudes[i + 1] + '<br>' : ' + ');
+    }
+
+    return div;
+};
+
+legend.addTo(myMap);
+
+

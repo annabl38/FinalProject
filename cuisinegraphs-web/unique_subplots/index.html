@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A First Look at the Data</title>
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+
+    <!-- Color scale -->
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="header">Exploratory Analysis</h1> 
+        <!-- <img src="spoons.png" class="img-thumbnail" alt="Cloudy Map" class="float right"> -->
+        <p class="sub">a first taste of the data</p> 
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>The data originated from Yummly. There are 20 different cuisines classified in
+                    this sample:
+                </p>
+                <p>  39,774 different recipes</p>
+                <p>  428,275 individual ingredients in these recipes </p>
+                <p>Of these, there are 6,714 unique ingredients</p>
+                <hr>
+                <p> To see a graphic distribution of unique ingredients amoung cuisine types, click the image to the right    ---></p>
+            </div>
+
+            <div class="col-sm-3">
+            <a href='subplot.html'>
+                <img src="spoons.png" alt='Spoons' class='img-thumbail' style="width: 250px;height: 200 px;">
+            </a>
+            </div>
+            <div class="col-sm-5">
+                <p>The following cuisines & their unique ingredients:</p>
+                <p>Japanese: Sake</p>
+                <p>Greek: Feta Cheese Crumbs</p>
+                <p>Indian: Garam Marsala</p>
+                <p>Moroccan: Ground Ginger</p>
+                <p>Mexican: Avocado</p>
+                <p>Soy sauce, fish oil, and sesame oil are prevelant in all Asian cuisines</p>
+                </div>
+        </div>
+      </div>
+</body>
+</html>
