@@ -31,7 +31,16 @@
         <a class="nav-link" href="/viz">Visualizations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/url_input">Test it!</a>
+        <a class="nav-link" href="/map">Map</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Test it!
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/predict">Enter your own recipe!</a>
+          <a class="dropdown-item" href="/url_input">Enter a recipe from a website</a>
+        </div>
       </li>
     </ul>
   </div>
@@ -54,26 +63,12 @@
       <div class="container">
         <h1>Cuisine Finder</h1>
       </div>
-      <!-- <a href="/send" class="btn btn-primary" role="button">Add Your Fast Food Preferences</a> -->
     </div>
-    <!-- <form autocomplete="off" action="/action_page.php">
-      <div class="autocomplete" style="width:300px;">
-        <input id="myInput" type="text" name="myCountry" placeholder="Ingredient">
-      </div>
-      <input type="submit">
-      </form> -->
-
-    <!-- <div class="row">
-      <div class="col-md-12">
-        <h2>Look at all of the current data!</h2>
-        <div id="plot"></div>
-      </div>
-    </div> -->
     <div class='row'>
       <div class='col-md-6 text-wrap text-truncate'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu sapien porttitor, egestas justo nec, pulvinar augue. Aenean euismod lorem et lacus laoreet varius in non leo. Integer molestie urna id mattis lobortis. In auctor, sapien non pulvinar pulvinar, tellus felis rutrum massa, vel dignissim nunc justo eget nisi. Aliquam dignissim condimentum massa, at varius ante tincidunt sit amet. Nunc varius mi eget interdum eleifend. Nulla orci erat, varius ut scelerisque ac, posuere eget elit. Cras et tincidunt libero. Nunc id volutpat justo. Aliquam laoreet placerat rutrum. Ut a bibendum lorem. Pellentesque pellentesque urna et pretium maximus. Nunc tristique, nisi in faucibus rhoncus, enim metus commodo turpis, sit amet consequat mauris ligula sit amet turpis.
+        <p>Our persistent group of hungry data analysists with worldly tastes in popular cuisines wanted to see if we could create a machine learning model that could pit itself against our persnickety pallets.   After reviewing kaggle.com for machine learning competitions we found a data set that fit our neurotic needs.</p> <p>  From Kaggle:“If you're in Northern California, you'll bewalking past the inevitablebushels of leafy greens, spiked with dark purple kaleand the bright pinks and yellows of chard. Across the world in South Korea, mounds of bright red kimchi greet you, while the smell of the sea draws your attention to squids squirming nearby. India’s market is perhaps the most colorful, awash in the rich hues and aromas of dozens of spices: turmeric, star anise, poppy seeds, and garam masala as far as the eye can see.Some of our strongest geographic and cultural associations are tied to aregion's local foods. This playground competitionsasks you to predict the category of a dish's cuisine given alist of its ingredients.“</p>
       </div>
-      <div class='col-md-6 text-center'>
+      <div class='col-md-6 text-center my-auto'>
         <h3>Machine Learning</h3>
         <a href='/machlearn'>
           <!-- <img src="Resources/cloud_vs_lat.png" alt='Cloudiness vs Latitude' class='img-thumbail'> -->
@@ -91,11 +86,30 @@
         </a>
       </div>
       <div class='col-md-6 text-center align-middle'>
-        <h3>Test it yourself!</h3>
+        <h3>Test it with a url!</h3>
         <a href='/url_input'>
-          <!-- <img src="static/images/try_it.png" alt='Try it! Image' class='img-thumbail' style="border:1px solid black"> -->
           <i class="fas fa-vial fa-5x" style='color:darkcyan'></i>
         </a>
+      </div>
+    </div>
+    <hr>
+    <div class='row'>
+      <div class='col-md-6 text-center'>
+        <h3>Map</h3>
+        <a href='/map'>
+          <i class="fas fa-map-marked fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+      <div class='col-md-6 text-center align-middle'>
+        <h3>Test it with your own recipe!</h3>
+        <a href='/url_input'>
+          <i class="fas fa-utensils fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-12 text-center'>
+        <p></p>
       </div>
     </div>
 </div>

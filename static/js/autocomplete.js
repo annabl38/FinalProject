@@ -20176,6 +20176,7 @@ Looks like this:
 var ingredients = [];
 d3.csv("static/js/ingredients.csv", function(data) {
   ingredients.push(data.ingredients)
+  console.log(data)
 });
 
 // var ingredientsJSONURL = [];
