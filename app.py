@@ -29,6 +29,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.models import load_model
 from keras.models import model_from_json
+from keras import backend as k
 import tensorflow as tf
 # import database
 data = pd.read_json("db/train.json")
@@ -100,6 +101,15 @@ class CuisineFinder(db.Model):
 
     def __repr__(self):
         return '<CuisineFinder %r>' % (self.name)
+
+class CuisineFinderAuto(db.Model):
+    __tablename__ = 'ingredient_list'
+
+    id = db.Column(db.Integer, primary_key=True)
+    ingredient_autocomplete = db.Column(db.String(500))
+
+    def __repr__(self):
+        return '<CuisineFinderAuto %r>' % (self.name)
 
 db.create_all()
 #################################################
@@ -262,7 +272,7 @@ def spoonacular_app():
             encoding[i_map[items]] = 1
         else:
             print(items + " not found")
-
+    k.clear_session()
     test = np.expand_dims(encoding, axis=0)
     test.shape
     deep_model = Sequential()
@@ -275,29 +285,54 @@ def spoonacular_app():
     deep_model.compile(optimizer='adam',
                     loss='categorical_crossentropy',
                     metrics=['accuracy'])
+    
     output = cuis_unique[int((deep_model.predict_classes(test)))]
     # print(output)
     output.capitalize()
     # ==============================
-    
+    k.clear_session()
     # return jsonify(data_for_json)
     return render_template('output.html',output=output)
     # return "cheese"
 
 
-@app.route('/viz')
+@app.route('/map')
 def Map():
+    return render_template('map.html')
+
+@app.route('/viz')
+def Viz():
     return render_template('viz.html')
 
-
 @app.route('/machlearn')
-def Kim():
+def Colab():
     return render_template('machlearn.html')
+
+
+@app.route('/predict',  methods=["GET", "POST"])
+def predict():
+    if request.method == 'POST':
+        ingredient_autocomplete = request.form["ingredient-list[]"]
+        print(ingredient_autocomplete)
+    return render_template("predict.html")
 
 
 @app.route('/autocomplete')
 def auto():
     return render_template('autocomplete.html')
+
+@app.route("/autocomplete_post", methods=["GET", "POST"])
+def recipe_input_page():
+    
+
+
+    if request.method == "POST":
+        # recipe_url = request.form["recipe_url"]
+        ingredient_autocomplete = request.form["ingredient_autocomplete"]
+        print(ingredient_autocomplete)
+
+
+    return render_template("autocomplete.html")
 
 # This will be where the json for the ingredients list will be stored
 @app.route('/autocomplete_ingredients')

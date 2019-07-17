@@ -1,3 +1,22 @@
+/*
+This file has multiple unresolved issues
+1. 
+loading the ingredient list from the csv file using this code
+d3.csv("db/ingredients.csv", function(data) {
+  ingredients.push(data.ingredients)
+});
+works when outside of the Flask app, but I can't get it to work inside the Flask app
+
+So I tried to come up with alternative solutions. None of which have worked so far
+First was creating ingredientsJSONhardcoded, which was basically adding the jsonified csv file directly to this js file
+Next was attempting to load the data via JSON file
+I don't know how to fix it
+
+2. 
+Code at the end needs to integrate with autocomplete.html so that `recipeJSON` can be posted to the sqlite database
+*/
+
+
 const ingredientsJSONhardcoded = [
     {
       "ingredients": "romaine lettuce"
@@ -20155,23 +20174,24 @@ Looks like this:
 */
 
 var ingredients = [];
-d3.csv("db/ingredients.csv", function(data) {
+d3.csv("static/js/ingredients.csv", function(data) {
   ingredients.push(data.ingredients)
+  console.log(data)
 });
 
-var ingredientsJSONURL = [];
-// Load ingredientsJSONURL
-d3.json("db/autocomplete_ingredients.json", function(data) {
-    console.log(data);
-    ingredientsJSONURL.push(data.ingredients)
-});
+// var ingredientsJSONURL = [];
+// // Load ingredientsJSONURL
+// d3.json("db/autocomplete_ingredients.json", function(data) {
+//     console.log(data);
+//     ingredientsJSONURL.push(data.ingredients)
+// });
 
-var ingredientsJSONH = [];
-// Load ingredientsJSONhardcoded
-d3.json(ingredientsJSONhardcoded, function(data) {
-    console.log(data);
-    ingredientsJSONH.push(data.ingredients)
-});
+// var ingredientsJSONH = [];
+// // Load ingredientsJSONhardcoded
+// d3.json(ingredientsJSONhardcoded, function(data) {
+//     console.log(data);
+//     ingredientsJSONH.push(data.ingredients)
+// });
 
 // // Load Ingredients JSON
 // d3.json("http://127.0.0.1:5000/autocomplete_ingredients", function(data) {

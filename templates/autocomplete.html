@@ -30,7 +30,7 @@
     <!-- <link rel="stylesheet" href="../static/css/cuisinestyle.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cuisinestyle.css') }}">
     <link href="{{ url_for('static',filename='css/all.css') }}" rel="stylesheet">
-
+    <!--End Styles for CuisineFinder-->
 
 </head>
 
@@ -61,7 +61,8 @@
     <!-- ===================Navbar BOT================== -->
 
     <!-- ingredient chooser -->
-    <form autocomplete="off" action="/action_page.php">
+    <form autocomplete="off">
+        <!-- <form autocomplete="off" action="/autocomplete"> -->
         <div class="autocomplete" style="width:300px;">
             <input id="myInput" type="text" name="myCountry" placeholder="Ingredient">
         </div>
@@ -79,6 +80,21 @@
     <!-- inport javascript file -->
     <!-- <script type="text/javascript" src="autocomplete.js"></script> -->
     <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
+
+<!--#################-->
+    <!-- The code above needs to be modified to be more like the example code below from the Spoonacular route. The spoonacular route stores the 
+    user input in the sqlite database
+    The autocomplete.js file currently creates a list of ingredients in JSON format. This list needs to be stored to the database -->
+
+    <!-- Example Code From Spoonacular -->
+    <!-- <form method="POST" action="/url_input" role="form" , name="fastfoodform">
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input type="text" class="form-control" id="inputName" name="recipe_url" placeholder="URL">
+        </div>
+
+        <input type="submit" value="submit" class="btn btn-info">
+      </form> -->
 
 
 
