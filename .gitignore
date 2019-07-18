@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 config.js
 test.txt
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

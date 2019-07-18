@@ -27,7 +27,6 @@ mock==3.0.5
 numpy==1.16.4
 pandas==0.24.2
 protobuf==3.8.0
-psycopg2==2.8.2
 pycparser==2.19
 pyOpenSSL==19.0.0
 pyreadline==2.1
