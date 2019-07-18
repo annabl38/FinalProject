@@ -308,6 +308,9 @@ def Viz():
 def Colab():
     return render_template('machlearn.html')
 
+@app.route('/subplot')
+def subplot():
+    return render_template('subplot.html')
 
 @app.route('/predict',  methods=["GET", "POST"])
 def predict():
@@ -315,32 +318,6 @@ def predict():
         ingredient_autocomplete = request.form["ingredient-list[]"]
         print(ingredient_autocomplete)
     return render_template("predict.html")
-
-
-@app.route('/autocomplete')
-def auto():
-    return render_template('autocomplete.html')
-
-@app.route("/autocomplete_post", methods=["GET", "POST"])
-def recipe_input_page():
-    
-
-
-    if request.method == "POST":
-        # recipe_url = request.form["recipe_url"]
-        ingredient_autocomplete = request.form["ingredient_autocomplete"]
-        print(ingredient_autocomplete)
-
-
-    return render_template("autocomplete.html")
-
-# This will be where the json for the ingredients list will be stored
-@app.route('/autocomplete_ingredients')
-def auto_ingredients():
-    data = pd.read_json("db/autocomplete_ingredients.json")
-
-    # return jsonify(data)
-    return data
 
 
 if __name__ == "__main__":

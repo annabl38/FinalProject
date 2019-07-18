@@ -1,0 +1,28 @@
+h1{
+    color: darkcyan
+}
+/* .jumbotron{
+    background-color: white
+} */
+/* .jumbotron{
+    padding-top:10px
+} */
+.nav-item{
+    font-weight: bold
+}
+
+#taste-header{
+  text-align: center;
+  /* color: rgb(240, 192, 104); */
+  color: white;
+  /* text-shadow: 3px 3px rgb(250, 222, 168); */
+  /* text-shadow: 3px 3px rgb(67, 140, 199); */
+  font-weight:bold
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-image: url('../images/appetizer.png');
+  background-size: cover;
+}
+#taste{
+    color:white
+}

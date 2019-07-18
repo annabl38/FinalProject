@@ -6,12 +6,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}"> -->
-    <!-- <link rel="stylesheet" href="../static/css/cuisinestyle.css"> -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/cuisinestyle.css') }}">
     <link href="{{ url_for('static',filename='css/all.css') }}" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="static/Anna/css/style2.css"> -->
     <title>Cuisine Finder</title>
 </head>
 
@@ -47,18 +43,62 @@
 </nav>
 <!-- ===================Navbar BOT================== -->
 
-
-<main class="container">
-     
-<!-- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="shortcut icon" href="">
-</head> -->
-    
 <body>
-
+  <div class="container" >
+    <div class="jumbotron jumbotron-fluid mt-1" style="text-align: center">
+      <div class="container">
+        <h1>Cuisine Finder</h1>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6 text-wrap text-truncate'>
+        <p>Our persistent group of hungry data analysists with worldly tastes in popular cuisines wanted to see if we could create a machine learning model that could pit itself against our persnickety pallets.   After reviewing kaggle.com for machine learning competitions we found a data set that fit our neurotic needs.</p> <p>  From Kaggle:“If you're in Northern California, you'll bewalking past the inevitablebushels of leafy greens, spiked with dark purple kaleand the bright pinks and yellows of chard. Across the world in South Korea, mounds of bright red kimchi greet you, while the smell of the sea draws your attention to squids squirming nearby. India’s market is perhaps the most colorful, awash in the rich hues and aromas of dozens of spices: turmeric, star anise, poppy seeds, and garam masala as far as the eye can see.Some of our strongest geographic and cultural associations are tied to aregion's local foods. This playground competitionsasks you to predict the category of a dish's cuisine given alist of its ingredients.“</p>
+      </div>
+      <div class='col-md-6 text-center my-auto'>
+        <h3>Machine Learning</h3>
+        <a href='/machlearn'>
+        
+          <i class="fas fa-robot fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+    </div>
+    <hr>
+    <div class='row'>
+      <div class='col-md-6 text-center'>
+        <h3>Visualizations</h3>
+        <a href='/viz'>
+        
+          <i class="fas fa-chart-line fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+      <div class='col-md-6 text-center align-middle'>
+        <h3>Test it with a url!</h3>
+        <a href='/url_input'>
+          <i class="fas fa-vial fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+    </div>
+    <hr>
+    <div class='row'>
+      <div class='col-md-6 text-center'>
+        <h3>Map</h3>
+        <a href='/map'>
+          <i class="fas fa-map-marked fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+      <div class='col-md-6 text-center align-middle'>
+        <h3>Test it with your own recipe!</h3>
+        <a href='/predict'>
+          <i class="fas fa-utensils fa-5x" style='color:darkcyan'></i>
+        </a>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-12 text-center mb-5'>
+        <p></p>
+      </div>
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -68,5 +108,7 @@
 
 
 </body>
+  
+  
 
 </html>

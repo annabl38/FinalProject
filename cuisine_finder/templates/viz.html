@@ -46,76 +46,48 @@
   </div>
 </nav>
 <!-- ===================Navbar BOT================== -->
+    <div class="jumbotron jumbotron-fluid" id='taste-header'>
+        <h1 id="taste">Exploratory Analysis</h1> 
+        <!-- <img src="spoons.png" class="img-thumbnail" alt="Cloudy Map" class="float right"> -->
+        <p class="sub">a first taste of the data</p> 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>The data originated from Yummly. There are 20 different cuisines classified in
+                    this sample:
+                </p>
+                <p>  39,774 different recipes</p>
+                <p>  428,275 individual ingredients in these recipes </p>
+                <p>Of these, there are 6,714 unique ingredients</p>
+                <hr>
+                <p> To see a graphic distribution of unique ingredients amoung cuisine types, click the image to the right    ---></p>
+            </div>
+
+            <div class="col-sm-3">
+            <a href='/subplot'>
+                <img src="{{ url_for('static',filename='images/spoons.png') }}" alt='Spoons' class='img-fluid' style="width: 250px;height: 200 px;">
+            </a>
+            </div>
+            <div class="col-sm-5">
+                <p>The following cuisines & their unique ingredients:</p>
+                <p>Japanese: Sake</p>
+                <p>Greek: Feta Cheese Crumbs</p>
+                <p>Indian: Garam Marsala</p>
+                <p>Moroccan: Ground Ginger</p>
+                <p>Mexican: Avocado</p>
+                <p>Soy sauce, fish oil, and sesame oil are prevelant in all Asian cuisines</p>
+                </div>
+        </div>
+      </div>
 
 
-<main class="container">
-     
-<!-- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="shortcut icon" href="">
-</head> -->
+
     
-<body>
-  <div class="container" >
-    <div class="jumbotron jumbotron-fluid" style="text-align: center">
-      <div class="container">
-        <h1>Cuisine Finder</h1>
-      </div>
-    </div>
-    <div class='row'>
-      <div class='col-md-6 text-wrap text-truncate'>
-        <p>Our persistent group of hungry data analysists with worldly tastes in popular cuisines wanted to see if we could create a machine learning model that could pit itself against our persnickety pallets.   After reviewing kaggle.com for machine learning competitions we found a data set that fit our neurotic needs.</p> <p>  From Kaggle:“If you're in Northern California, you'll bewalking past the inevitablebushels of leafy greens, spiked with dark purple kaleand the bright pinks and yellows of chard. Across the world in South Korea, mounds of bright red kimchi greet you, while the smell of the sea draws your attention to squids squirming nearby. India’s market is perhaps the most colorful, awash in the rich hues and aromas of dozens of spices: turmeric, star anise, poppy seeds, and garam masala as far as the eye can see.Some of our strongest geographic and cultural associations are tied to aregion's local foods. This playground competitionsasks you to predict the category of a dish's cuisine given alist of its ingredients.“</p>
-      </div>
-      <div class='col-md-6 text-center my-auto'>
-        <h3>Machine Learning</h3>
-        <a href='/machlearn'>
-          <!-- <img src="Resources/cloud_vs_lat.png" alt='Cloudiness vs Latitude' class='img-thumbail'> -->
-          <i class="fas fa-robot fa-5x" style='color:darkcyan'></i>
-        </a>
-      </div>
-    </div>
-    <hr>
-    <div class='row'>
-      <div class='col-md-6 text-center'>
-        <h3>Visualizations</h3>
-        <a href='/viz'>
-          <!-- <img src="Resources/cloud_vs_lat.png" alt='Cloudiness vs Latitude' class='img-thumbail'> -->
-          <i class="fas fa-chart-line fa-5x" style='color:darkcyan'></i>
-        </a>
-      </div>
-      <div class='col-md-6 text-center align-middle'>
-        <h3>Test it with a url!</h3>
-        <a href='/url_input'>
-          <i class="fas fa-vial fa-5x" style='color:darkcyan'></i>
-        </a>
-      </div>
-    </div>
-    <hr>
-    <div class='row'>
-      <div class='col-md-6 text-center'>
-        <h3>Map</h3>
-        <a href='/map'>
-          <i class="fas fa-map-marked fa-5x" style='color:darkcyan'></i>
-        </a>
-      </div>
-      <div class='col-md-6 text-center align-middle'>
-        <h3>Test it with your own recipe!</h3>
-        <a href='/url_input'>
-          <i class="fas fa-utensils fa-5x" style='color:darkcyan'></i>
-        </a>
-      </div>
-    </div>
-    <div class='row'>
-      <div class='col-md-12 text-center'>
-        <p></p>
-      </div>
-    </div>
-</div>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
-<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="{{ url_for('static', filename='../static/js/switch.js') }}"></script>
 <script src="//unpkg.com/sunburst-chart"></script>
@@ -123,11 +95,5 @@
 
 
 </body>
-  
-  
-</main>
 
-
-
-</body>
 </html>
