@@ -23,6 +23,7 @@ from sqlalchemy import create_engine
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import to_categorical
 import numpy as np
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_classification
 from keras.models import Sequential
@@ -32,8 +33,9 @@ from keras.models import model_from_json
 from keras import backend as k
 import tensorflow as tf
 # import database
-data = pd.read_json("db/train.json")
+print(os.getcwd())
 
+data = pd.read_json("db/train.json")
 # create cuisnie list for output
 cuisine_list = data['cuisine']
 cuisine_compilation = []
