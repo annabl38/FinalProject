@@ -312,9 +312,42 @@ def Colab():
 @app.route('/predict',  methods=["GET", "POST"])
 def predict():
     if request.method == 'POST':
-        ingredient_autocomplete = request.form["ingredient-list[]"]
+        ingredient_autocomplete = request.form.getlist('ingredient-list[]')
         print(ingredient_autocomplete)
-    return render_template("predict.html")
+        # Here...
+        # render_template("predict.html", {
+        #     "ingredient_list": ingredient_autocomplete
+        # })
+
+        input_ingred = ingredient_autocomplete
+
+        encoding = [0]*len(i_map)
+        for items in input_ingred:
+            if items in i_list:
+                encoding[i_map[items]] = 1
+            else:
+                print(items + " not found")
+        k.clear_session()
+        test = np.expand_dims(encoding, axis=0)
+        test.shape
+        deep_model = Sequential()
+        deep_model.add(Dense(units=20, activation='relu', input_dim=6714))
+        deep_model.add(Dense(units=15, activation='relu'))
+        deep_model.add(Dense(units=10, activation='relu'))
+        deep_model.add(Dense(units=20, activation='softmax'))
+        # Load weights into the new model
+        deep_model.load_weights('Model/cuisine_deep_model_trained.h5')
+        deep_model.compile(optimizer='adam',
+                        loss='categorical_crossentropy',
+                        metrics=['accuracy'])
+    
+        output = cuis_unique[int((deep_model.predict_classes(test)))]
+        print(output)
+        output.capitalize()
+        # ==============================
+        k.clear_session()
+        return render_template("predict.html", output=output)
+    return render_template("predict.html", output='')
 
 
 @app.route('/autocomplete')

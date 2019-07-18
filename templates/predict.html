@@ -55,7 +55,13 @@
                 <button type="submit" value="Submit">Predict Stuff</button>
             </form>
       </div>
+      
     </div>
+    <div class='row'>
+        <div class='col-md-12'>
+          <p>{{ output }}</p>
+        </div>
+      </div>
   </div>
     <script src="{{ url_for('static', filename='../static/js/predict.js') }}"></script>
   </body>
